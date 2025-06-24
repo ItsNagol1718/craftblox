@@ -742,4 +742,103 @@ authors="${author}"
 
 </body>
 </html>
+<section id="roblox">
+<section class="section" id="roblox">
+  <h2>Roblox Corner 🕹️</h2>
+
+  <div class="card">
+    <h3>Popular Games</h3>
+    <ul id="popularGames" style="list-style:none; padding-left:0;">
+      <!-- JS will fill -->
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Avatar Customizer</h3>
+    <p>Pick colors for your avatar clothes and see a live preview.</p>
+    <label>
+      Shirt Color:
+      <input type="color" id="shirtColor" value="#ff0000" />
+    </label>
+    <label>
+      Pants Color:
+      <input type="color" id="pantsColor" value="#0000ff" />
+    </label>
+    <div id="avatarPreview" style="margin-top:10px; width:120px; height:200px; background:#333; border-radius:8px; position:relative;">
+      <div id="shirt" style="position:absolute; top:40px; left:20px; width:80px; height:80px; background:#ff0000; border-radius:4px;"></div>
+      <div id="pants" style="position:absolute; top:130px; left:20px; width:80px; height:60px; background:#0000ff; border-radius:4px;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Dev Tips</h3>
+    <ul>
+      <li><a href="https://developer.roblox.com/en-us/" target="_blank" rel="noopener">Roblox Developer Hub</a></li>
+      <li><a href="https://create.roblox.com/docs" target="_blank" rel="noopener">Roblox Studio Docs</a></li>
+      <li><a href="https://www.roblox.com/games" target="_blank" rel="noopener">Roblox Game Directory</a></li>
+      <li><a href="https://devforum.roblox.com/" target="_blank" rel="noopener">Roblox DevForum</a></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Roblox User Search</h3>
+    <input type="text" id="robloxUsername" placeholder="Enter username" />
+    <button onclick="searchRobloxUser()">Search</button>
+    <div id="userResult" style="margin-top:1rem; color:#0f0;"></div>
+  </div>
+
+</section>
+
+<script>
+  // Populate Popular Games list (example games)
+  const games = [
+    {name: "Adopt Me!", id: 920587237},
+    {name: "Brookhaven 🏡RP", id: 4924922222},
+    {name: "Tower of Hell", id: 1962086868},
+    {name: "Jailbreak", id: 606849621},
+    {name: "Piggy", id: 4623386862}
+  ];
+  const popularGamesUL = document.getElementById('popularGames');
+  games.forEach(game => {
+    const li = document.createElement('li');
+    li.style.marginBottom = '0.5rem';
+    const a = document.createElement('a');
+    a.href = `https://www.roblox.com/games/${game.id}`;
+    a.textContent = game.name;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    li.appendChild(a);
+    popularGamesUL.appendChild(li);
+  });
+
+  // Avatar customizer color picker live update
+  const shirt = document.getElementById('shirt');
+  const pants = document.getElementById('pants');
+  document.getElementById('shirtColor').addEventListener('input', e => {
+    shirt.style.backgroundColor = e.target.value;
+  });
+  document.getElementById('pantsColor').addEventListener('input', e => {
+    pants.style.backgroundColor = e.target.value;
+  });
+
+  // Roblox user search - simulated demo (since API needs server)
+  function searchRobloxUser() {
+    const username = document.getElementById('robloxUsername').value.trim();
+    const resultDiv = document.getElementById('userResult');
+    if (!username) {
+      resultDiv.style.color = '#f00';
+      resultDiv.textContent = "Please enter a username.";
+      return;
+    }
+    // Simulate a search delay
+    resultDiv.style.color = '#0f0';
+    resultDiv.textContent = "Searching for user '" + username + "'...";
+    setTimeout(() => {
+      // Fake data example
+      const fakeUserId = Math.floor(Math.random() * 1000000000);
+      resultDiv.innerHTML = `<b>Username:</b> ${username} <br> <b>User ID:</b> ${fakeUserId} <br> <a href="https://www.roblox.com/users/${fakeUserId}/profile" target="_blank" rel="noopener">View Profile</a>`;
+    }, 1500);
+  }
+</script>
+
 
