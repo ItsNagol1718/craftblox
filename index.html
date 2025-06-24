@@ -2,156 +2,743 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CraftBlox Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CraftBlox Hub - Minecraft & Roblox Generators</title>
   <style>
     body {
-      margin: 0;
+      margin: 0; background: #111; color: #eee;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #111;
-      color: #eee;
     }
-
     header {
-      background-color: #202225;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background: #202225; padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
     }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #00ff99;
-    }
-
+    .logo { font-size: 1.5rem; font-weight: bold; color: #00ff99; }
     nav a {
-      margin: 0 1rem;
-      text-decoration: none;
-      color: #ccc;
+      margin: 0 1rem; color: #ccc; text-decoration: none;
     }
-
-    nav a:hover {
-      color: #00ffcc;
-    }
-
+    nav a:hover { color: #00ffcc; }
     .search-bar {
-      margin: 2rem auto;
-      text-align: center;
+      margin: 1.5rem auto; text-align: center;
     }
-
     .search-bar input[type="text"] {
-      width: 60%;
-      padding: 0.7rem;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: none;
-      outline: none;
+      width: 60%; padding: 0.7rem; font-size: 1rem;
+      border-radius: 8px; border: none; outline: none;
     }
-
     .section {
-      padding: 2rem;
-      border-bottom: 1px solid #333;
+      padding: 2rem; border-bottom: 1px solid #333;
+      max-width: 900px; margin: 0 auto;
     }
-
-    .section h2 {
-      color: #00ffcc;
-      margin-bottom: 1rem;
+    .section h2 { color: #00ffcc; margin-bottom: 1rem; }
+    .tab-buttons {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;
     }
-
+    .tab-buttons button {
+      background: #333; color: #eee; border: none;
+      padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;
+      transition: background-color 0.3s;
+      user-select: none;
+    }
+    .tab-buttons button.active {
+      background: #00ff99; color: #111;
+    }
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
     .card {
-      background-color: #1e1e1e;
-      border-radius: 10px;
-      padding: 1rem;
-      margin: 1rem 0;
+      background: #1e1e1e; border-radius: 10px;
+      padding: 1rem; margin: 1rem 0;
     }
-
+    label {
+      display: block; margin-bottom: 0.5rem;
+    }
+    input[type="text"], input[type="number"], select, textarea {
+      width: 100%; padding: 0.5rem; margin-bottom: 1rem;
+      border-radius: 6px; border: none; outline: none;
+      background: #222; color: #eee;
+      font-family: monospace, monospace;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    button.generate-btn {
+      background: #00ff99; border: none; padding: 0.7rem 1.2rem;
+      font-weight: bold; cursor: pointer; border-radius: 6px;
+      color: #111;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+    button.generate-btn:hover {
+      background: #00cc77;
+    }
+    button.download-btn {
+      margin-top: 0.5rem; background: #0a7; border: none;
+      padding: 0.6rem 1rem; font-weight: bold;
+      border-radius: 6px; cursor: pointer; color: #ddd;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+    button.download-btn:hover {
+      background: #085;
+    }
     footer {
-      background-color: #202225;
-      color: #777;
-      text-align: center;
-      padding: 1rem;
+      background: #202225; color: #777;
+      text-align: center; padding: 1rem;
+      margin-top: 3rem;
     }
-
     @media (max-width: 768px) {
-      .search-bar input[type="text"] {
-        width: 90%;
-      }
-
-      nav {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      nav a {
-        margin: 0.5rem 0;
-      }
+      .search-bar input[type="text"] { width: 90%; }
+      nav { flex-direction: column; text-align: center; }
+      nav a { margin: 0.5rem 0; }
+      .tab-buttons { justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">CraftBlox Hub</div>
-    <nav>
-      <a href="#minecraft">Minecraft</a>
-      <a href="#roblox">Roblox</a>
-      <a href="#community">Community</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo">CraftBlox Hub</div>
+  <nav>
+    <a href="#minecraft">Minecraft</a>
+    <a href="#roblox">Roblox</a>
+    <a href="#community">Community</a>
+  </nav>
+</header>
 
-  <div class="search-bar">
-    <input type="text" placeholder="Search Minecraft mods or tools...">
+<div class="search-bar">
+  <input type="text" placeholder="Search Minecraft mods or tools...">
+</div>
+
+<section class="section" id="minecraft">
+  <h2>Minecraft Zone 🧱</h2>
+
+  <div class="tab-buttons" role="tablist">
+    <button class="tab-btn active" data-tab="mods" role="tab" aria-selected="true">Mods</button>
+    <button class="tab-btn" data-tab="enchantments" role="tab" aria-selected="false">Enchantments</button>
+    <button class="tab-btn" data-tab="crafting" role="tab" aria-selected="false">Crafting</button>
+    <button class="tab-btn" data-tab="resources" role="tab" aria-selected="false">Resource Packs</button>
+    <button class="tab-btn" data-tab="advancements" role="tab" aria-selected="false">Advancements</button>
+    <button class="tab-btn" data-tab="functions" role="tab" aria-selected="false">Functions</button>
   </div>
 
-  <section class="section" id="minecraft">
-    <h2>Minecraft Zone 🧱</h2>
+  <!-- Mods Generator -->
+  <div id="mods" class="tab-content active" role="tabpanel">
     <div class="card">
-      <h3>Top Mods</h3>
-      <p>Explore trending Fabric and Forge mods for 1.20.1 and more!</p>
-    </div>
-    <div class="card">
-      <h3>Texture Packs</h3>
-      <p>Browse HD and classic-style texture packs.</p>
-    </div>
-    <div class="card">
-      <h3>Survival Tools</h3>
-      <p>Install datapacks, minimaps, and mod utilities.</p>
-    </div>
-  </section>
+      <h3>Mod Generator</h3>
+      <form id="modForm">
+        <label>
+          Mod Loader:
+          <select id="modLoader" required>
+            <option value="fabric">Fabric</option>
+            <option value="forge">Forge</option>
+            <option value="neoforge">NeoForge</option>
+            <option value="quilt">Quilt</option>
+          </select>
+        </label>
 
-  <section class="section" id="roblox">
-    <h2>Roblox Corner 🕹️</h2>
-    <div class="card">
-      <h3>Popular Games</h3>
-      <p>Check out trending tycoons, obbies, and simulators!</p>
-    </div>
-    <div class="card">
-      <h3>Avatar Customizer</h3>
-      <p>Learn how to style your Roblox avatar with UGC items.</p>
-    </div>
-    <div class="card">
-      <h3>Dev Tips</h3>
-      <p>Start developing your own games with Roblox Studio guides.</p>
-    </div>
-  </section>
+        <label>
+          Minecraft Version:
+          <select id="mcVersion" required></select>
+        </label>
 
-  <section class="section" id="community">
-    <h2>Community 💬</h2>
-    <div class="card">
-      <h3>Fan Submissions</h3>
-      <p>Upload your own mods, skins, or showcase videos.</p>
-    </div>
-    <div class="card">
-      <h3>Message Wall</h3>
-      <p>Post messages, server invites, or player meetups!</p>
-    </div>
-  </section>
+        <label>
+          Mod Name:
+          <input type="text" id="modName" required placeholder="ExampleMod" />
+        </label>
 
-  <footer>
-    <p>&copy; 2025 CraftBlox Hub. Not affiliated with Mojang or Roblox Corp.</p>
-  </footer>
+        <label>
+          Description:
+          <input type="text" id="modDesc" placeholder="Mod description..." />
+        </label>
+
+        <label>
+          Author:
+          <input type="text" id="modAuthor" placeholder="Your name" />
+        </label>
+
+        <button type="button" class="generate-btn" onclick="generateModFile()">Generate Mod File</button>
+      </form>
+      <textarea id="modOutput" rows="12" readonly placeholder="Generated mod file will appear here..."></textarea>
+      <button id="modDownloadBtn" class="download-btn" style="display:none;">Download File</button>
+    </div>
+  </div>
+
+  <!-- Enchantments Generator -->
+  <div id="enchantments" class="tab-content" role="tabpanel" hidden>
+    <div class="card">
+      <h3>Enchantment Generator</h3>
+      <form id="enchantForm">
+        <label>
+          Enchantment ID:
+          <input type="text" id="enchantID" required placeholder="example_enchant" pattern="[a-z0-9_]+" />
+        </label>
+        <label>
+          Display Name:
+          <input type="text" id="enchantName" required placeholder="Example Enchant" />
+        </label>
+        <label>
+          Max Level:
+          <input type="number" id="enchantMaxLevel" min="1" max="10" value="1" required />
+        </label>
+        <label>
+          Rarity:
+          <select id="enchantRarity" required>
+            <option value="common">Common</option>
+            <option value="uncommon">Uncommon</option>
+            <option value="rare">Rare</option>
+            <option value="very_rare">Very Rare</option>
+          </select>
+        </label>
+        <button type="button" class="generate-btn" onclick="generateEnchantFile()">Generate Enchantment JSON</button>
+      </form>
+      <textarea id="enchantOutput" rows="12" readonly placeholder="Generated enchantment JSON will appear here..."></textarea>
+      <button id="enchantDownloadBtn" class="download-btn" style="display:none;">Download JSON</button>
+    </div>
+  </div>
+
+  <!-- Crafting Recipe Generator -->
+  <div id="crafting" class="tab-content" role="tabpanel" hidden>
+    <div class="card">
+      <h3>Crafting Recipe Generator</h3>
+      <form id="craftForm">
+        <label>
+          Recipe Type:
+          <select id="recipeType" required>
+            <option value="shaped">Shaped</option>
+            <option value="shapeless">Shapeless</option>
+          </select>
+        </label>
+
+        <label>
+          Recipe ID:
+          <input type="text" id="recipeID" required placeholder="example_recipe" pattern="[a-z0-9_]+" />
+        </label>
+
+        <label>
+          Result Item (minecraft namespace):
+          <input type="text" id="resultItem" required placeholder="minecraft:diamond_sword" />
+        </label>
+
+        <label>
+          Result Count:
+          <input type="number" id="resultCount" min="1" value="1" required />
+        </label>
+
+        <div id="shapedInputs">
+          <label>
+            Pattern (use 1-3 lines, each max 3 chars, e.g. "###", " # ", " # "):
+            <textarea id="recipePattern" placeholder="###\n # \n # " rows="3"></textarea>
+          </label>
+
+          <label>
+            Key (char to item mapping in JSON, e.g. {"#": "minecraft:stick"}):
+            <textarea id="recipeKey" placeholder='{"#": "minecraft:stick"}' rows="4"></textarea>
+          </label>
+        </div>
+
+        <div id="shapelessInputs" style="display:none;">
+          <label>
+            Ingredients (JSON array, e.g. ["minecraft:stick", "minecraft:coal"]):
+            <textarea id="shapelessIngredients" placeholder='["minecraft:stick", "minecraft:coal"]' rows="4"></textarea>
+          </label>
+        </div>
+
+        <button type="button" class="generate-btn" onclick="generateRecipe()">Generate Recipe JSON</button>
+      </form>
+      <textarea id="recipeOutput" rows="14" readonly placeholder="Generated recipe JSON will appear here..."></textarea>
+      <button id="recipeDownloadBtn" class="download-btn" style="display:none;">Download JSON</button>
+    </div>
+  </div>
+
+  <!-- Resource Pack Generator -->
+  <div id="resources" class="tab-content" role="tabpanel" hidden>
+    <div class="card">
+      <h3>Resource Pack Generator</h3>
+      <form id="resourceForm">
+        <label>
+          Pack Name:
+          <input type="text" id="packName" required placeholder="MyResourcePack" />
+        </label>
+        <label>
+          Description:
+          <input type="text" id="packDesc" placeholder="A cool resource pack" />
+        </label>
+        <label>
+          Pack Format:
+          <select id="packFormat" required>
+            <option value="13">1.20.4 - 1.21.6</option>
+            <option value="12">1.19 - 1.20.3</option>
+            <option value="11">1.18 - 1.18.2</option>
+            <option value="10">1.17 - 1.17.1</option>
+            <option value="9">1.16.2 - 1.16.5</option>
+            <option value="8">1.15</option>
+            <option value="7">1.14</option>
+            <option value="6">1.13</option>
+            <option value="5">1.12</option>
+            <option value="4">1.11</option>
+            <option value="3">1.10</option>
+          </select>
+        </label>
+        <button type="button" class="generate-btn" onclick="generateResourcePack()">Generate pack.mcmeta</button>
+      </form>
+      <textarea id="resourceOutput" rows="8" readonly placeholder="Generated pack.mcmeta will appear here..."></textarea>
+      <button id="resourceDownloadBtn" class="download-btn" style="display:none;">Download JSON</button>
+    </div>
+  </div>
+
+  <!-- Advancements Generator -->
+  <div id="advancements" class="tab-content" role="tabpanel" hidden>
+    <div class="card">
+      <h3>Advancement Generator</h3>
+      <form id="advForm">
+        <label>
+          Advancement ID:
+          <input type="text" id="advID" required placeholder="example_advancement" pattern="[a-z0-9_]+" />
+        </label>
+        <label>
+          Title:
+          <input type="text" id="advTitle" required placeholder="My Advancement" />
+        </label>
+        <label>
+          Description:
+          <input type="text" id="advDesc" placeholder="Advancement description" />
+        </label>
+        <label>
+          Icon (minecraft item):
+          <input type="text" id="advIcon" placeholder="minecraft:diamond" />
+        </label>
+        <button type="button" class="generate-btn" onclick="generateAdvancement()">Generate Advancement JSON</button>
+      </form>
+      <textarea id="advOutput" rows="14" readonly placeholder="Generated advancement JSON will appear here..."></textarea>
+      <button id="advDownloadBtn" class="download-btn" style="display:none;">Download JSON</button>
+    </div>
+  </div>
+
+  <!-- Functions Generator -->
+  <div id="functions" class="tab-content" role="tabpanel" hidden>
+    <div class="card">
+      <h3>Function File Generator</h3>
+      <form id="funcForm">
+        <label>
+          Function Name (without extension):
+          <input type="text" id="funcName" required placeholder="example_function" pattern="[a-z0-9_]+" />
+        </label>
+        <label>
+          Commands (one per line):
+          <textarea id="funcCommands" rows="8" placeholder="say Hello\ngive @p minecraft:diamond_sword"></textarea>
+        </label>
+        <button type="button" class="generate-btn" onclick="generateFunction()">Generate .mcfunction</button>
+      </form>
+      <textarea id="funcOutput" rows="10" readonly placeholder="Generated function commands will appear here..."></textarea>
+      <button id="funcDownloadBtn" class="download-btn" style="display:none;">Download .mcfunction</button>
+    </div>
+  </div>
+
+</section>
+
+<section class="section" id="roblox">
+  <h2>Roblox Corner 🕹️</h2>
+  <div class="card">
+    <h3>Popular Games</h3>
+    <p>Check out trending tycoons, obbies, and simulators!</p>
+  </div>
+  <div class="card">
+    <h3>Avatar Customizer</h3>
+    <p>Learn how to style your Roblox avatar with UGC items.</p>
+  </div>
+  <div class="card">
+    <h3>Dev Tips</h3>
+    <p>Start developing your own games with Roblox Studio guides.</p>
+  </div>
+</section>
+
+<section class="section" id="community">
+  <h2>Community 💬</h2>
+  <div class="card">
+    <h3>Fan Submissions</h3>
+    <p>Upload your own mods, skins, or showcase videos.</p>
+  </div>
+  <div class="card">
+    <h3>Message Wall</h3>
+    <p>Post messages, server invites, or player meetups!</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 CraftBlox Hub. Not affiliated with Mojang or Roblox Corp.</p>
+</footer>
+
+<script>
+  // Tabs functionality
+  const tabs = document.querySelectorAll('.tab-btn');
+  const contents = document.querySelectorAll('.tab-content');
+  tabs.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      contents.forEach(c => {
+        c.classList.remove('active');
+        c.hidden = true;
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      contents[i].classList.add('active');
+      contents[i].hidden = false;
+    });
+  });
+
+  // Populate Minecraft versions dropdown for Mod Generator
+  const mcVersionSelect = document.getElementById('mcVersion');
+  const mcVersions = [
+    '1.10', '1.11', '1.12', '1.13', '1.14', '1.15', '1.16',
+    '1.17', '1.18', '1.19', '1.19.1', '1.19.2', '1.20', '1.20.1',
+    '1.21', '1.21.1', '1.21.2', '1.21.3', '1.21.4', '1.21.5', '1.21.6'
+  ];
+  mcVersions.forEach(v => {
+    const option = document.createElement('option');
+    option.value = v; option.textContent = v;
+    mcVersionSelect.appendChild(option);
+  });
+
+  // -------- Mod Generator ------------
+  function generateModFile() {
+    const loader = document.getElementById('modLoader').value;
+    const version = document.getElementById('mcVersion').value;
+    const name = document.getElementById('modName').value.trim();
+    const desc = document.getElementById('modDesc').value.trim() || "No description";
+    const author = document.getElementById('modAuthor').value.trim() || "Unknown";
+
+    if(!name) {
+      alert('Please enter a mod name.');
+      return;
+    }
+
+    let content = "";
+    let filename = "";
+
+    if(loader === 'fabric') {
+      filename = 'fabric.mod.json';
+      content = JSON.stringify({
+        "schemaVersion": 1,
+        "id": name.toLowerCase(),
+        "version": "1.0.0",
+        "name": name,
+        "description": desc,
+        "authors": [author],
+        "contact": {},
+        "license": "MIT",
+        "environment": "*",
+        "entrypoints": {
+          "main": [ `${name.toLowerCase()}.Main` ]
+        },
+        "depends": {
+          "minecraft": `>=${version}`
+        }
+      }, null, 2);
+    } else if(loader === 'forge' || loader === 'neoforge') {
+      filename = 'mods.toml';
+      content = `modLoader=${loader === 'forge' ? 'forge' : 'neoforge'}
+loaderVersion="[${version},)"
+license="MIT"
+issueTrackerURL=""
+displayName="${name}"
+version="1.0.0"
+description="${desc}"
+authors="${author}"
+`;
+    } else if(loader === 'quilt') {
+      filename = 'quilt.mod.json';
+      content = JSON.stringify({
+        "schemaVersion": 1,
+        "quilt_loader": {
+          "group": "com.example",
+          "id": name.toLowerCase(),
+          "version": "1.0.0"
+        },
+        "name": name,
+        "description": desc,
+        "authors": [author],
+        "depends": {
+          "minecraft": `>=${version}`
+        }
+      }, null, 2);
+    }
+
+    const output = document.getElementById('modOutput');
+    output.value = content;
+
+    const downloadBtn = document.getElementById('modDownloadBtn');
+    downloadBtn.style.display = "inline-block";
+
+    downloadBtn.onclick = () => {
+      const blob = new Blob([content], {type: loader === 'forge' || loader === 'neoforge' ? 'text/plain' : 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    };
+  }
+
+  // -------- Enchantment Generator ------------
+  function generateEnchantFile() {
+    const id = document.getElementById('enchantID').value.trim();
+    const name = document.getElementById('enchantName').value.trim();
+    const maxLevel = parseInt(document.getElementById('enchantMaxLevel').value);
+    const rarity = document.getElementById('enchantRarity').value;
+
+    if(!id || !name || !maxLevel || maxLevel < 1) {
+      alert('Fill all required fields properly.');
+      return;
+    }
+
+    // Simple enchantment JSON schema example
+    const enchantJSON = {
+      type: "enchantment",
+      id: id,
+      name: name,
+      max_level: maxLevel,
+      rarity: rarity
+    };
+
+    const content = JSON.stringify(enchantJSON, null, 2);
+
+    const output = document.getElementById('enchantOutput');
+    output.value = content;
+
+    const downloadBtn = document.getElementById('enchantDownloadBtn');
+    downloadBtn.style.display = "inline-block";
+
+    downloadBtn.onclick = () => {
+      const blob = new Blob([content], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${id}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    };
+  }
+
+  // -------- Crafting Recipe Generator ------------
+  const recipeTypeSelect = document.getElementById('recipeType');
+  const shapedInputs = document.getElementById('shapedInputs');
+  const shapelessInputs = document.getElementById('shapelessInputs');
+
+  recipeTypeSelect.addEventListener('change', () => {
+    if(recipeTypeSelect.value === 'shaped') {
+      shapedInputs.style.display = 'block';
+      shapelessInputs.style.display = 'none';
+    } else {
+      shapedInputs.style.display = 'none';
+      shapelessInputs.style.display = 'block';
+    }
+  });
+
+  function generateRecipe() {
+    const type = recipeTypeSelect.value;
+    const id = document.getElementById('recipeID').value.trim();
+    const resultItem = document.getElementById('resultItem').value.trim();
+    const resultCount = parseInt(document.getElementById('resultCount').value);
+
+    if(!id || !resultItem || !resultCount || resultCount < 1) {
+      alert('Fill all required fields properly.');
+      return;
+    }
+
+    let recipe = {type: `minecraft:${type}`, result: {item: resultItem, count: resultCount}};
+
+    try {
+      if(type === 'shaped') {
+        const patternRaw = document.getElementById('recipePattern').value.trim();
+        const keyRaw = document.getElementById('recipeKey').value.trim();
+        if(!patternRaw || !keyRaw) {
+          alert('For shaped recipes, pattern and key are required.');
+          return;
+        }
+        const patternLines = patternRaw.split('\n').filter(line => line.trim() !== '');
+        const keyObj = JSON.parse(keyRaw);
+
+        recipe.pattern = patternLines;
+        recipe.key = {};
+        for(let k in keyObj) {
+          recipe.key[k] = {item: keyObj[k]};
+        }
+      } else {
+        const ingredientsRaw = document.getElementById('shapelessIngredients').value.trim();
+        if(!ingredientsRaw) {
+          alert('For shapeless recipes, ingredients are required.');
+          return;
+        }
+        const ingredientsArr = JSON.parse(ingredientsRaw);
+        recipe.ingredients = ingredientsArr.map(i => ({item: i}));
+      }
+    } catch(e) {
+      alert('Invalid JSON input. Check key/ingredients fields.');
+      return;
+    }
+
+    const content = JSON.stringify(recipe, null, 2);
+
+    const output = document.getElementById('recipeOutput');
+    output.value = content;
+
+    const downloadBtn = document.getElementById('recipeDownloadBtn');
+    downloadBtn.style.display = "inline-block";
+
+    downloadBtn.onclick = () => {
+      const blob = new Blob([content], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${id}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    };
+  }
+
+  // -------- Resource Pack Generator ------------
+  function generateResourcePack() {
+    const name = document.getElementById('packName').value.trim();
+    const desc = document.getElementById('packDesc').value.trim() || "";
+    const format = parseInt(document.getElementById('packFormat').value);
+
+    if(!name) {
+      alert('Please enter a pack name.');
+      return;
+    }
+
+    const packmcmeta = {
+      pack: {
+        pack_format: format,
+        description: desc
+      }
+    };
+
+    const content = JSON.stringify(packmcmeta, null, 2);
+
+    const output = document.getElementById('resourceOutput');
+    output.value = content;
+
+    const downloadBtn = document.getElementById('resourceDownloadBtn');
+    downloadBtn.style.display = "inline-block";
+
+    downloadBtn.onclick = () => {
+      const blob = new Blob([content], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'pack.mcmeta';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    };
+  }
+
+  // -------- Advancements Generator ------------
+  function generateAdvancement() {
+    const id = document.getElementById('advID').value.trim();
+    const title = document.getElementById('advTitle').value.trim();
+    const desc = document.getElementById('advDesc').value.trim() || "";
+    const icon = document.getElementById('advIcon').value.trim() || "minecraft:diamond";
+
+    if(!id || !title) {
+      alert('Fill required fields.');
+      return;
+    }
+
+    // Simple advancement JSON template
+    const advancementJSON = {
+      display: {
+        title: {text: title},
+        description: {text: desc},
+        icon: {item: icon},
+        frame: "task",
+        show_toast: true,
+        announce_to_chat: true,
+        hidden: false
+      },
+      criteria: {
+        "impossible": {
+          "trigger": "minecraft:impossible"
+        }
+      }
+    };
+
+    const content = JSON.stringify(advancementJSON, null, 2);
+
+    const output = document.getElementById('advOutput');
+    output.value = content;
+
+    const downloadBtn = document.getElementById('advDownloadBtn');
+    downloadBtn.style.display = "inline-block";
+
+    downloadBtn.onclick = () => {
+      const blob = new Blob([content], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${id}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    };
+  }
+
+  // -------- Functions Generator ------------
+  function generateFunction() {
+    const name = document.getElementById('funcName').value.trim();
+    const commandsRaw = document.getElementById('funcCommands').value.trim();
+
+    if(!name) {
+      alert('Please enter a function name.');
+      return;
+    }
+
+    const commands = commandsRaw.split('\n').filter(line => line.trim() !== '');
+
+    if(commands.length === 0) {
+      alert('Enter at least one command.');
+      return;
+    }
+
+    const content = commands.join('\n');
+
+    const output = document.getElementById('funcOutput');
+    output.value = content;
+
+    const downloadBtn = document.getElementById('funcDownloadBtn');
+    downloadBtn.style.display = "inline-block";
+
+    downloadBtn.onclick = () => {
+      const blob = new Blob([content], {type: 'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${name}.mcfunction`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    };
+  }
+</script>
 
 </body>
 </html>
