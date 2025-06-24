@@ -2,11 +2,156 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CraftBlox Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #111;
+      color: #eee;
+    }
+
+    header {
+      background-color: #202225;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #00ff99;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #ccc;
+    }
+
+    nav a:hover {
+      color: #00ffcc;
+    }
+
+    .search-bar {
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .search-bar input[type="text"] {
+      width: 60%;
+      padding: 0.7rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    .section {
+      padding: 2rem;
+      border-bottom: 1px solid #333;
+    }
+
+    .section h2 {
+      color: #00ffcc;
+      margin-bottom: 1rem;
+    }
+
+    .card {
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    footer {
+      background-color: #202225;
+      color: #777;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .search-bar input[type="text"] {
+        width: 90%;
+      }
+
+      nav {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      nav a {
+        margin: 0.5rem 0;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to CraftBlox Hub!</h1>
-  <p>A Minecraft and Roblox Community Site</p>
+
+  <header>
+    <div class="logo">CraftBlox Hub</div>
+    <nav>
+      <a href="#minecraft">Minecraft</a>
+      <a href="#roblox">Roblox</a>
+      <a href="#community">Community</a>
+    </nav>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Search Minecraft mods or tools...">
+  </div>
+
+  <section class="section" id="minecraft">
+    <h2>Minecraft Zone 🧱</h2>
+    <div class="card">
+      <h3>Top Mods</h3>
+      <p>Explore trending Fabric and Forge mods for 1.20.1 and more!</p>
+    </div>
+    <div class="card">
+      <h3>Texture Packs</h3>
+      <p>Browse HD and classic-style texture packs.</p>
+    </div>
+    <div class="card">
+      <h3>Survival Tools</h3>
+      <p>Install datapacks, minimaps, and mod utilities.</p>
+    </div>
+  </section>
+
+  <section class="section" id="roblox">
+    <h2>Roblox Corner 🕹️</h2>
+    <div class="card">
+      <h3>Popular Games</h3>
+      <p>Check out trending tycoons, obbies, and simulators!</p>
+    </div>
+    <div class="card">
+      <h3>Avatar Customizer</h3>
+      <p>Learn how to style your Roblox avatar with UGC items.</p>
+    </div>
+    <div class="card">
+      <h3>Dev Tips</h3>
+      <p>Start developing your own games with Roblox Studio guides.</p>
+    </div>
+  </section>
+
+  <section class="section" id="community">
+    <h2>Community 💬</h2>
+    <div class="card">
+      <h3>Fan Submissions</h3>
+      <p>Upload your own mods, skins, or showcase videos.</p>
+    </div>
+    <div class="card">
+      <h3>Message Wall</h3>
+      <p>Post messages, server invites, or player meetups!</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 CraftBlox Hub. Not affiliated with Mojang or Roblox Corp.</p>
+  </footer>
+
 </body>
 </html>
